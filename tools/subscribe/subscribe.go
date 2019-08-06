@@ -29,7 +29,7 @@ func main() {
 	r, err := websockets.NewRemote(*host)
 	checkErr(err, true)
 
-	confirmation, err := r.Subscribe(true, !*proposed, *proposed, true)
+	confirmation, err := r.Subscribe(nil, true, !*proposed, *proposed, true)
 	checkErr(err, true)
 	terminal.Println(fmt.Sprint("Subscribed at: ", confirmation.LedgerSequence), terminal.Default)
 

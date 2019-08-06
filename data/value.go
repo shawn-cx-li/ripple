@@ -497,6 +497,14 @@ func (v Value) String() string {
 	return strings.TrimRight(rat.FloatString(32-length), "0")
 }
 
+// DropString returns string format value as drop
+func (v Value) DropString() string {
+	if v.IsZero() {
+		return "0"
+	}
+	return strconv.FormatUint(v.num, 10)
+}
+
 func (v Value) debug() string {
 	return fmt.Sprintf("Native: %t Negative: %t Value: %d Offset: %d", v.native, v.negative, v.num, v.offset)
 }

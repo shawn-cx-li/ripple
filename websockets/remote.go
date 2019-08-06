@@ -443,7 +443,7 @@ func (r *Remote) BookOffers(taker data.Account, ledgerIndex interface{}, pays, g
 
 // Synchronously subscribe to streams and receive a confirmation message
 // Streams are recived asynchronously over the Incoming channel
-func (r *Remote) Subscribe(ledger, transactions, transactionsProposed, server bool) (*SubscribeResult, error) {
+func (r *Remote) Subscribe(accounts []string, ledger, transactions, transactionsProposed, server bool) (*SubscribeResult, error) {
 	streams := []string{}
 	if ledger {
 		streams = append(streams, "ledger")
@@ -458,8 +458,9 @@ func (r *Remote) Subscribe(ledger, transactions, transactionsProposed, server bo
 		streams = append(streams, "server")
 	}
 	cmd := &SubscribeCommand{
-		Command: newCommand("subscribe"),
-		Streams: streams,
+		Command:  newCommand("subscribe"),
+		Accounts: accounts,
+		Streams:  streams,
 	}
 	r.outgoing <- cmd
 	<-cmd.Ready

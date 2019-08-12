@@ -153,7 +153,7 @@ type LedgerResult struct {
 
 type LedgerHeaderCommand struct {
 	*Command
-	Ledger interface{} `json:"ledger"`
+	Ledger interface{} `json:"ledger,omitempty"`
 	Result *LedgerHeaderResult
 }
 
